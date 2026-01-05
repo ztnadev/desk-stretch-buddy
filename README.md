@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+# DeskFit - Desk Exercise App
 
-## Project info
+A wellness application that helps desk workers stay healthy with personalized exercise recommendations, streak tracking, and achievements.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Technologies
 
-## How can I edit this code?
+- React + TypeScript + Vite
+- Tailwind CSS + shadcn/ui
+- Supabase (Auth, Database, Edge Functions)
+- Framer Motion for animations
 
-There are several ways of editing your application.
+## Running with Docker
 
-**Use Lovable**
+### Prerequisites
+- Docker installed on your machine
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Build and Run
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+```bash
+# Clone the repository
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Build the Docker image
+docker build -t deskfit .
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Run the container
+docker run -p 8080:80 deskfit
+```
+
+The app will be available at `http://localhost:8080`
+
+### Docker Commands Reference
+
+```bash
+# Stop the container
+docker stop $(docker ps -q --filter ancestor=deskfit)
+
+# Remove the image
+docker rmi deskfit
+
+# Rebuild after changes
+docker build -t deskfit . --no-cache
+```
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Pushing to GitHub
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Initialize git (if not already done)
+git init
 
-**Use GitHub Codespaces**
+# Add all files
+git add .
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Commit changes
+git commit -m "Initial commit"
 
-## What technologies are used for this project?
+# Add remote origin
+git remote add origin <YOUR_GITHUB_REPO_URL>
 
-This project is built with:
+# Push to GitHub
+git push -u origin main
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Project Structure
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- `src/pages/` - Page components (Index, Auth, Dashboard)
+- `src/components/` - Reusable UI components
+- `src/hooks/` - Custom React hooks
+- `supabase/functions/` - Edge functions for AI recommendations
+- `Dockerfile` - Multi-stage Docker build configuration
+- `nginx.conf` - Nginx configuration for SPA routing
